@@ -30,17 +30,53 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+                  'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
     'haystack',
     'south',
     'captcha',
     'feedback',
+    'allauth.socialaccount',
+    #'allauth.socialaccount.providers.facebook',
 )
+
+SITE_ID=1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_REQUIRED = True
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
+ 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.request",
+    "django.contrib.auth.context_processors.auth",
+    "allauth.account.context_processors.account",
+    #Uncomment the next line for social account
+    "allauth.socialaccount.context_processors.socialaccount",
+)
+
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/'
+# Uncomment for facebook provider usage
+#SOCIALACCOUNT_QUERY_EMAIL = True
+#SOCIALACCOUNT_PROVIDERS = {
+ #   'facebook': {
+  #      'SCOPE': ['email', 'publish_stream'],
+   #     'METHOD': 'js_sdk'  # instead of 'oauth2'
+    #}
+#}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

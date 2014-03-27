@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'south',
     'captcha',
     'feedback',
+    'organisation',
     'allauth.socialaccount',
     #'allauth.socialaccount.providers.facebook',
 )
